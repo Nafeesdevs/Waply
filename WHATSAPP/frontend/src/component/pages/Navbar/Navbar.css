@@ -1,0 +1,858 @@
+
+/* =========================================================
+   WAPLY — PREMIUM AUTONOMOUS AI NAVBAR
+   Theme: Ivory / Ink Black / Emerald
+   Works with your existing Navbar.jsx class names
+========================================================= */
+
+:root {
+  --waply-bg: #f5f3ef;
+  --waply-ink: #0a0a0a;
+  --waply-muted: #777771;
+  --waply-green: #10b981;
+  --waply-border: rgba(10, 10, 10, 0.09);
+  --waply-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- Fixed outer shell ---------- */
+
+.waply-navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  padding: 16px 5.5%;
+
+  pointer-events: none;
+
+  transition:
+    padding 0.4s var(--waply-ease);
+}
+
+.waply-navbar-wrapper.is-scrolled {
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+/* ---------- Main navbar capsule ---------- */
+
+.waply-navbar {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  width: 100%;
+  max-width: 1500px;
+  min-height: 72px;
+
+  padding: 10px 14px 10px 18px;
+
+  background: rgba(248, 247, 243, 0.86);
+  border: 1px solid rgba(20, 20, 20, 0.075);
+  border-radius: 999px;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.018),
+    0 12px 35px rgba(0, 0, 0, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+
+  pointer-events: auto;
+
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    min-height 0.35s var(--waply-ease);
+}
+
+.waply-navbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  border-radius: inherit;
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.48),
+    transparent 45%,
+    rgba(255, 255, 255, 0.12)
+  );
+}
+
+.waply-navbar-wrapper.is-scrolled .waply-navbar {
+  background: rgba(248, 247, 243, 0.96);
+  border-color: rgba(10, 10, 10, 0.11);
+
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.055),
+    0 2px 6px rgba(0, 0, 0, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- Brand ---------- */
+
+.waply-brand {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 12px;
+
+  color: var(--waply-ink);
+  text-decoration: none;
+  user-select: none;
+}
+
+.waply-brand-icon {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+
+  color: #fff;
+  background: #080b09;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 13px;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.waply-logo-text {
+  position: relative;
+  z-index: 2;
+
+  color: #fff;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.8px;
+}
+
+.waply-logo-glow {
+  position: absolute;
+  z-index: 0;
+  inset: -35%;
+
+  background: radial-gradient(
+    circle at 35% 40%,
+    rgba(16, 185, 129, 0.9),
+    transparent 48%
+  );
+
+  animation: waply-logo-spin 7s linear infinite;
+}
+
+@keyframes waply-logo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.waply-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.waply-brand-name {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  color: var(--waply-ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 23px;
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: 0.115em;
+  text-transform: uppercase;
+}
+
+.waply-brand-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+
+  background: var(--waply-green);
+  border-radius: 50%;
+
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.32);
+  animation: waply-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes waply-dot-pulse {
+  50% {
+    opacity: 0.5;
+    transform: scale(0.78);
+  }
+}
+
+.waply-brand-sub {
+  color: #8b8a84;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* ---------- Desktop navigation ---------- */
+
+.waply-nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+
+  padding: 5px;
+
+  background: rgba(15, 15, 15, 0.032);
+  border: 1px solid rgba(15, 15, 15, 0.045);
+  border-radius: 999px;
+}
+
+.waply-nav-link {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 39px;
+  padding: 0 17px;
+
+  color: #666660;
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.105em;
+  text-transform: uppercase;
+
+  border-radius: 999px;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s var(--waply-ease);
+}
+
+.waply-nav-link:hover {
+  color: var(--waply-ink);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.waply-nav-link:active {
+  transform: scale(0.97);
+}
+
+.waply-nav-link.is-active {
+  color: var(--waply-ink);
+  font-weight: 750;
+}
+
+.waply-nav-active-pill {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  bottom: 3px;
+
+  height: 2px;
+
+  background: var(--waply-green);
+  border-radius: 999px;
+  box-shadow: 0 0 7px rgba(16, 185, 129, 0.35);
+}
+
+/* ---------- Right-side actions ---------- */
+
+.waply-nav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  gap: 13px;
+}
+
+.waply-btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 9px;
+
+  color: var(--waply-ink);
+  text-decoration: none;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  transition: color 0.2s ease;
+}
+
+.waply-btn-login:hover {
+  color: var(--waply-green);
+}
+
+.waply-btn-signup {
+  position: relative;
+  overflow: hidden;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+
+  min-height: 44px;
+  padding: 0 23px;
+
+  color: #fff;
+  background: var(--waply-ink);
+  border: 1px solid var(--waply-ink);
+  border-radius: 999px;
+
+  text-decoration: none;
+  white-space: nowrap;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s var(--waply-ease);
+}
+
+.waply-btn-signup:hover {
+  background: #171a18;
+  border-color: #171a18;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.14);
+  transform: translateY(-2px);
+}
+
+.waply-btn-signup:active {
+  transform: scale(0.97);
+}
+
+.waply-arrow-icon {
+  width: 15px;
+  height: 15px;
+
+  transition: transform 0.25s var(--waply-ease);
+}
+
+.waply-btn-signup:hover .waply-arrow-icon {
+  transform: translate(3px, -3px);
+}
+
+/* ---------- Authenticated user controls ---------- */
+
+.waply-user-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.waply-user-role {
+  padding: 7px 10px;
+
+  color: #53534d;
+  background: rgba(10, 10, 10, 0.045);
+  border: 1px solid var(--waply-border);
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.waply-btn-dashboard {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 42px;
+  padding: 0 16px;
+
+  color: #fff;
+  background: var(--waply-ink);
+  border-radius: 999px;
+  text-decoration: none;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.waply-btn-dashboard:hover {
+  background: #242824;
+  transform: translateY(-1px);
+}
+
+.waply-btn-dashboard svg {
+  width: 15px;
+  height: 15px;
+}
+
+.waply-btn-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 39px;
+  height: 39px;
+
+  color: #555;
+  background: transparent;
+  border: 1px solid var(--waply-border);
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.waply-btn-logout svg {
+  width: 16px;
+  height: 16px;
+}
+
+.waply-btn-logout:hover {
+  color: #c53030;
+  background: #fff0ee;
+  border-color: #f1c2bb;
+}
+
+/* ---------- Hamburger ---------- */
+
+.waply-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+
+  color: var(--waply-ink);
+  background: rgba(10, 10, 10, 0.045);
+  border: 1px solid rgba(10, 10, 10, 0.08);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    transform 0.25s ease;
+}
+
+.waply-mobile-toggle:hover {
+  background: rgba(10, 10, 10, 0.09);
+}
+
+.waply-mobile-toggle:active {
+  transform: scale(0.93);
+}
+
+.waply-mobile-toggle svg {
+  width: 19px;
+  height: 19px;
+  stroke-width: 1.8;
+}
+
+/* ---------- Mobile navigation drawer ---------- */
+
+.waply-mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  padding: 112px 24px 32px;
+
+  background: rgba(247, 246, 241, 0.98);
+  border-top: 1px solid rgba(10, 10, 10, 0.07);
+
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+}
+
+.waply-mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 560px;
+  min-height: calc(100dvh - 144px);
+
+  margin: 0 auto;
+}
+
+.waply-mobile-header-tag {
+  margin-bottom: 17px;
+  padding-bottom: 13px;
+
+  color: #898880;
+  border-bottom: 1px solid var(--waply-border);
+
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.waply-mobile-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.waply-mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 20px 2px;
+
+  color: var(--waply-ink);
+  border-bottom: 1px solid rgba(10, 10, 10, 0.085);
+  text-decoration: none;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(25px, 6vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  text-transform: uppercase;
+
+  transition:
+    color 0.2s ease,
+    padding 0.25s var(--waply-ease);
+}
+
+.waply-mobile-link svg {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+
+  color: #898880;
+  stroke-width: 1.5;
+
+  transition:
+    color 0.2s ease,
+    transform 0.25s ease;
+}
+
+.waply-mobile-link:hover,
+.waply-mobile-link.is-active {
+  padding-left: 8px;
+  color: #07885f;
+}
+
+.waply-mobile-link:hover svg {
+  color: var(--waply-green);
+  transform: translate(3px, -3px);
+}
+
+/* ---------- Mobile account actions ---------- */
+
+.waply-mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  margin-top: 35px;
+  padding-top: 22px;
+}
+
+.waply-mobile-btn-outline,
+.waply-mobile-btn-solid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 53px;
+  padding: 14px 20px;
+
+  border-radius: 999px;
+  text-decoration: none;
+
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.waply-mobile-btn-outline {
+  color: var(--waply-ink);
+  background: transparent;
+  border: 1px solid rgba(10, 10, 10, 0.2);
+}
+
+.waply-mobile-btn-outline:hover {
+  background: rgba(10, 10, 10, 0.045);
+}
+
+.waply-mobile-btn-solid {
+  color: #fff;
+  background: var(--waply-ink);
+  border: 1px solid var(--waply-ink);
+}
+
+.waply-mobile-btn-solid:hover {
+  background: #252925;
+}
+
+.waply-mobile-btn-solid svg,
+.waply-mobile-btn-outline svg {
+  width: 16px;
+  height: 16px;
+}
+
+.waply-mobile-btn-solid:active,
+.waply-mobile-btn-outline:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Responsive layouts ---------- */
+
+@media (max-width: 1100px) {
+  .waply-navbar-wrapper {
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .waply-navbar {
+    gap: 12px;
+    min-height: 67px;
+    padding-left: 14px;
+    padding-right: 11px;
+  }
+
+  .waply-brand {
+    gap: 9px;
+  }
+
+  .waply-brand-icon {
+    width: 39px;
+    height: 39px;
+    border-radius: 11px;
+  }
+
+  .waply-brand-name {
+    font-size: 19px;
+    letter-spacing: 0.09em;
+  }
+
+  .waply-nav-link {
+    padding-left: 11px;
+    padding-right: 11px;
+    font-size: 10px;
+  }
+
+  .waply-nav-actions {
+    gap: 7px;
+  }
+
+  .waply-btn-signup {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+}
+
+@media (max-width: 900px) {
+  .waply-navbar-wrapper {
+    padding: 12px 20px;
+  }
+
+  .waply-navbar-wrapper.is-scrolled {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .waply-navbar {
+    min-height: 64px;
+    padding: 9px 10px 9px 14px;
+  }
+
+  .waply-nav-links {
+    display: none;
+  }
+
+  .waply-btn-login,
+  .waply-btn-signup {
+    display: none;
+  }
+
+  .waply-mobile-toggle {
+    display: flex;
+  }
+
+  .waply-nav-actions {
+    gap: 8px;
+  }
+
+  .waply-user-role {
+    display: none;
+  }
+
+  .waply-btn-dashboard {
+    min-height: 39px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .waply-navbar-wrapper {
+    padding: 10px 12px;
+  }
+
+  .waply-navbar-wrapper.is-scrolled {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  .waply-navbar {
+    min-height: 59px;
+    gap: 8px;
+    padding: 7px 8px 7px 10px;
+  }
+
+  .waply-brand {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .waply-brand-icon {
+    width: 37px;
+    height: 37px;
+    border-radius: 11px;
+  }
+
+  .waply-logo-text {
+    font-size: 13px;
+  }
+
+  .waply-brand-name {
+    font-size: 17px;
+    letter-spacing: 0.075em;
+  }
+
+  .waply-brand-sub {
+    display: none;
+  }
+
+  .waply-nav-actions {
+    gap: 6px;
+  }
+
+  .waply-mobile-toggle {
+    width: 39px;
+    height: 39px;
+  }
+
+  .waply-btn-dashboard {
+    width: 39px;
+    height: 39px;
+    min-height: 39px;
+    padding: 0;
+  }
+
+  .waply-btn-dashboard span {
+    display: none;
+  }
+
+  .waply-mobile-menu {
+    padding: 92px 22px 25px;
+  }
+
+  .waply-mobile-menu-inner {
+    min-height: calc(100dvh - 117px);
+  }
+
+  .waply-mobile-link {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
+
+/* ---------- Accessibility ---------- */
+
+.waply-navbar a:focus-visible,
+.waply-navbar button:focus-visible,
+.waply-mobile-menu a:focus-visible,
+.waply-mobile-menu button:focus-visible {
+  outline: 2px solid var(--waply-green);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waply-navbar *,
+  .waply-mobile-menu *,
+  .waply-navbar-wrapper {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
