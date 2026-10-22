@@ -1,13 +1,26 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 
-// MongoDB connection (replaces the previous MySQL/Prisma client).
-// DATABASE_URL example: mongodb://127.0.0.1:27017/waply
 export const connectDB = async () => {
-  await mongoose.connect(process.env.DATABASE_URL, {
+  const dbUrl = process.env.DATABASE_URL;
+
+  if (!dbUrl) {
+    throw new Error(
+      "DATABASE_URL is missing. Check your backend/.env file."
+    );
+  }
+
+  const conn = await mongoose.connect(dbUrl, {
+    serverSelectionTimeoutMS: 10000,
     maxPoolSize: 5,
   });
-  console.log("MongoDB connected");
+
+  await mongoose.connection.db.admin().ping();
+
+  console.log(
+    "MongoDB Connected with server:",
+    conn.connection.host
+  );
 };
 
 export default mongoose;
