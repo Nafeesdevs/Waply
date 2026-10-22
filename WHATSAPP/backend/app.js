@@ -20,21 +20,31 @@ app.use(helmet());
 
 // CORS is restricted to the configured frontend origin(s). Set
 // FRONTEND_URL (comma-separated for multiple origins) in .env.
-const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+// const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
+//   .split(",")
+//   .map((origin) => origin.trim())
+//   .filter(Boolean);
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       // Allow non-browser tools (no Origin header) and configured origins.
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       }
+//       return callback(new Error("Not allowed by CORS"));
+//     },
+//     credentials: true,
+//   })
+// );
+
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      // Allow non-browser tools (no Origin header) and configured origins.
-      if (!origin || allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
+    origin: true,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
